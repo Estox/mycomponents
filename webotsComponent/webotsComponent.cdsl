@@ -1,0 +1,11 @@
+import "DifferentialRobot.idsl";
+
+Component webotsComponent
+{
+    Communications
+    {
+        requires DifferentialRobot;
+    };
+    language python;
+};
+

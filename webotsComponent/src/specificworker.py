@@ -54,28 +54,22 @@ class SpecificWorker(GenericWorker):
 
     @QtCore.Slot()
     def compute(self):
-            print ('SpecificWorker.compute...')
-            rot = 0.7
-            try:
-                ldata = []
-                d = []
-                ldata = self.laser_proxy.getLaserData();
-                for i in range(0,len(ldata)):
-                    dis = ldata[i]
-                    y = dis.dist
-                    d.append(y)
-                    d.sort()
-                    distance = d[0]
-                    print (distance)
-                    if distance < 400:
-                        self.differentialrobot_proxy.setSpeedBase(0, rot)
-                        time.sleep(1)
-                    else:
-                        self.differentialrobot_proxy.setSpeedBase(100, 0)
-            except Ice.Exception as e:
-                traceback.print_exc()
-                print (e)
-            return True
+        print('SpecificWorker.compute...')
+        # computeCODE
+        # try:
+        #   self.differentialrobot_proxy.setSpeedBase(100, 0)
+        # except Ice.Exception as e:
+        #   traceback.print_exc()
+        #   print(e)
+
+        # The API of python-innermodel is not exactly the same as the C++ version
+        # self.innermodel.updateTransformValues('head_rot_tilt_pose', 0, 0, 0, 1.3, 0, 0)
+        # z = librobocomp_qmat.QVec(3,0)
+        # r = self.innermodel.transform('rgbd', z, 'laser')
+        # r.printvector('d')
+        # print(r[0], r[1], r[2])
+
+        return True
 
     def startup_check(self):
         QTimer.singleShot(200, QApplication.instance().quit)
@@ -97,15 +91,4 @@ class SpecificWorker(GenericWorker):
     ######################
     # From the RoboCompDifferentialRobot you can use this types:
     # RoboCompDifferentialRobot.TMechParams
-
-    ######################
-    # From the RoboCompLaser you can call this methods:
-    # self.laser_proxy.getLaserAndBStateData(...)
-    # self.laser_proxy.getLaserConfData(...)
-    # self.laser_proxy.getLaserData(...)
-
-    ######################
-    # From the RoboCompLaser you can use this types:
-    # RoboCompLaser.LaserConfData
-    # RoboCompLaser.TData
 

@@ -20,7 +20,7 @@
 #    along with RoboComp.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# \mainpage RoboComp::MyFirstComp
+# \mainpage RoboComp::webotsComponent
 #
 # \section intro_sec Introduction
 #
@@ -48,7 +48,7 @@
 #
 # \subsection execution_ssec Execution
 #
-# Just: "${PATH_TO_BINARY}/MyFirstComp --Ice.Config=${PATH_TO_CONFIG_FILE}"
+# Just: "${PATH_TO_BINARY}/webotsComponent --Ice.Config=${PATH_TO_CONFIG_FILE}"
 #
 # \subsection running_ssec Once running
 #
@@ -127,23 +127,6 @@ if __name__ == '__main__':
     except Ice.Exception as e:
         print(e)
         print('Cannot get DifferentialRobotProxy property.')
-        status = 1
-
-
-    # Remote object connection for Laser
-    try:
-        proxyString = ic.getProperties().getProperty('LaserProxy')
-        try:
-            basePrx = ic.stringToProxy(proxyString)
-            laser_proxy = RoboCompLaser.LaserPrx.uncheckedCast(basePrx)
-            mprx["LaserProxy"] = laser_proxy
-        except Ice.Exception:
-            print('Cannot connect to the remote object (Laser)', proxyString)
-            #traceback.print_exc()
-            status = 1
-    except Ice.Exception as e:
-        print(e)
-        print('Cannot get LaserProxy property.')
         status = 1
 
     if status == 0:
