@@ -54,7 +54,8 @@ class SpecificWorker(GenericWorker):
 
     @QtCore.Slot()
     def compute(self):
-        print('SpecificWorker.compute...')
+        print("Moving forward")
+        self.differentialrobot_proxy.setSpeedBase(100,0)
         # computeCODE
         # try:
         #   self.differentialrobot_proxy.setSpeedBase(100, 0)
